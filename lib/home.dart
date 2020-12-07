@@ -46,7 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
               }),
-          Text('Hello world'),
           RaisedButton(
             child: Text('Fetch'),
             onPressed: () {

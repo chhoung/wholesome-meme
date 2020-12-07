@@ -13,14 +13,22 @@ class Service {
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       var posts = jsonResponse["data"]["children"];
-      var posturl;
+      var postUrl;
+      var postTitle;
 
       for (var post in posts) {
-        posturl = post["data"]["url_overridden_by_dest"];
-        _postList.add(Post(postUrl: posturl));
-        sliderList.add(SliderItem(post: Post(postUrl: posturl)));
+        postUrl = post["data"]["url_overridden_by_dest"];
+        postTitle = post["data"]["title"];
+        _postList.add(Post(postUrl: postUrl, title: postTitle));
+        sliderList.add(
+          SliderItem(
+            post: Post(postUrl: postUrl, title: postTitle),
+          ),
+        );
       }
-      print(posturl);
+
+      print(postUrl);
+      print(postTitle);
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
