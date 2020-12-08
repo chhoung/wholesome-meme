@@ -14,7 +14,6 @@ class _HomeScreenState extends State<HomeScreen> {
   List<SliderItem> memes = [];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -24,28 +23,25 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Image.network(
-          //   'https://i.redd.it/m1zj597boy261.jpg',
-          //   height: MediaQuery.of(context).size.height * 1 / 2,
-          // ),
           FutureBuilder<List<SliderItem>>(
-              future: service.fetchWholesome(),
-              builder: (context, snapshot) {
-                if (snapshot.data == null) {
-                  return CircularProgressIndicator();
-                } else {
-                  return CarouselSlider(
-                    carouselController: _pageController,
-                    items: snapshot.data,
-                    options: CarouselOptions(
-                      viewportFraction: 1,
-                      initialPage: 0,
-                      height: MediaQuery.of(context).size.height * 1 / 2,
-                      enableInfiniteScroll: true,
-                    ),
-                  );
-                }
-              }),
+            future: service.fetchWholesome(),
+            builder: (context, snapshot) {
+              if (snapshot.data == null) {
+                return CircularProgressIndicator();
+              } else {
+                return CarouselSlider(
+                  carouselController: _pageController,
+                  items: snapshot.data,
+                  options: CarouselOptions(
+                    viewportFraction: 1,
+                    initialPage: 0,
+                    height: MediaQuery.of(context).size.height * 1 / 2,
+                    enableInfiniteScroll: true,
+                  ),
+                );
+              }
+            },
+          ),
           RaisedButton(
             child: Text('Fetch'),
             onPressed: () {

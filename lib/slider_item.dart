@@ -22,9 +22,11 @@ class SliderItem extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Container(
             decoration: BoxDecoration(
-                border: Border.symmetric(
-                    horizontal: BorderSide(width: 1, color: Colors.grey),
-                    vertical: BorderSide(width: 0.5))),
+              border: Border.symmetric(
+                horizontal: BorderSide(width: 1, color: Colors.grey),
+                vertical: BorderSide(width: 0.5),
+              ),
+            ),
             child: Image.network(
               post.postUrl,
               width: MediaQuery.of(context).size.width,
