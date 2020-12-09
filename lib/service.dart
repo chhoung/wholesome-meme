@@ -2,6 +2,7 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:wholesome_meme/post.dart';
 import 'package:wholesome_meme/slider_item.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 class Service {
   final baseUrl = 'https://www.reddit.com/r/wholesomememes/top.json?limit=10';
@@ -33,6 +34,13 @@ class Service {
       print('Request failed with status: ${response.statusCode}.');
     }
     return sliderList;
+  }
+
+  void saveNetworkImage(String url) async {
+    String path = url;
+    GallerySaver.saveImage(path).then((bool success) {
+      print('Image is saved');
+    });
   }
 
   List<Post> get postsList => _postList;

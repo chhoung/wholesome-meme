@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:wholesome_meme/post.dart';
 import 'package:wholesome_meme/service.dart';
 import 'package:wholesome_meme/slider_item.dart';
 
@@ -12,6 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Service service = Service();
   final CarouselControllerImpl _pageController = CarouselControllerImpl();
   List<SliderItem> memes = [];
+
   @override
   void initState() {
     super.initState();
@@ -19,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Post currentPost = Post();
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -33,11 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   carouselController: _pageController,
                   items: snapshot.data,
                   options: CarouselOptions(
-                    viewportFraction: 1,
-                    initialPage: 0,
-                    height: MediaQuery.of(context).size.height * 1 / 2,
-                    enableInfiniteScroll: true,
-                  ),
+                      viewportFraction: 1,
+                      initialPage: 0,
+                      height: MediaQuery.of(context).size.height * 1 / 2,
+                      enableInfiniteScroll: true,
+                      onPageChanged: (index, reason) {
+                        print(index);
+                        currentPost = snapshot.data[index].post;
+                      }),
                 );
               }
             },
@@ -46,9 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text('Fetch'),
             onPressed: () {
               print('pressed');
-              service.fetchWholesome();
+              // service.fetchWholesome();
+              service.saveNetworkImage(currentPost.postUrl);
             },
-          )
+          ),
         ],
       ),
     );
